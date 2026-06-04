@@ -1,6 +1,7 @@
 \documentclass{article}
 
-\usepackage[paperwidth=3.5in, paperheight=2in, margin=0in]{geometry}
+\usepackage[paperwidth=3.5in, paperheight=2in,
+            top=0in, bottom=0in, left=0in, right=0in]{geometry}
 \usepackage{xcolor}
 \usepackage{tikz}
 \usepackage{qrcode}
@@ -10,69 +11,59 @@
 \definecolor{accent}{HTML}{1a1d27}
 \definecolor{indigo}{HTML}{6366f1}
 \definecolor{muted}{HTML}{6b7280}
-\definecolor{light}{HTML}{f7f6f2}
 
 \pagestyle{empty}
 
 \begin{document}
-\begin{tikzpicture}[remember picture, overlay]
+\noindent
+\begin{tikzpicture}[x=1in, y=1in]
 
-  %% White background
-  \fill[white] (current page.south west) rectangle (current page.north east);
+  %% Full white background
+  \fill[white] (0,0) rectangle (3.5,2);
 
-  %% Top accent strip
-  \fill[accent] (current page.north west) rectangle ([yshift=-0.38in]current page.north east);
+  %% Dark header bar (top 0.42in)
+  \fill[accent] (0, 1.58) rectangle (3.5, 2);
 
-  %% Indigo notch bottom-right of strip
-  \fill[indigo]
-    ([xshift=-0.7in, yshift=-0.38in]current page.north east) --
-    ([yshift=-0.38in]current page.north east) --
-    ([xshift=0in, yshift=-0.56in]current page.north east) -- cycle;
+  %% Indigo triangle accent in top-right of header
+  \fill[indigo] (2.85,1.58) -- (3.5,1.58) -- (3.5,2) -- cycle;
 
-  %% Name in strip
+  %% Name
   \node[anchor=west, text=white,
-        font=\fontsize{14}{16}\bfseries\selectfont]
-    at ([xshift=0.2in, yshift=-0.19in]current page.north west)
-    {CAMERON J. PASTORIUS};
+        font=\fontsize{13.5}{16}\bfseries\sffamily]
+    at (0.18, 1.79) {CAMERON J. PASTORIUS};
 
-  %% Title below name in strip
+  %% Title
   \node[anchor=west, text=indigo,
-        font=\fontsize{7}{9}\selectfont\itshape]
-    at ([xshift=0.21in, yshift=-0.32in]current page.north west)
-    {Electrical Designer · Engineering Intern (E.I.)};
+        font=\fontsize{6.8}{8}\itshape\sffamily]
+    at (0.19, 1.64) {Electrical Designer \ $\cdot$ \ Engineering Intern (E.I.)};
 
-  %% Vertical divider
-  \draw[color=accent!15, line width=0.5pt]
-    ([xshift=2.35in, yshift=-0.38in]current page.north west) --
-    ([xshift=2.35in, yshift=0.15in]current page.south west);
+  %% Vertical divider between contact and QR
+  \draw[muted!40, line width=0.4pt] (2.38, 0.14) -- (2.38, 1.50);
 
-  %% LEFT BLOCK — contact info
-  \node[anchor=north west, text=muted,
-        font=\fontsize{6.2}{10}\selectfont, align=left]
-    at ([xshift=0.2in, yshift=-0.52in]current page.north west) {%
-    \textcolor{accent}{\textbf{EMAIL}}\quad cam.pastorius0815@gmail.com \\[3pt]
-    \textcolor{accent}{\textbf{PHONE}}\quad +1 850-240-8867 \\[3pt]
-    \textcolor{accent}{\textbf{WEB}}\hspace{6.5pt}\quad linkedin.com/in/cameron-pastorius \\[3pt]
-    \textcolor{accent}{\textbf{GIT}}\hspace{8.5pt}\quad github.com/Nostar42
+  %% Contact block
+  \node[anchor=north west, text=accent,
+        font=\fontsize{6.2}{11}\sffamily, align=left]
+    at (0.18, 1.50) {%
+      {\color{muted}EMAIL} \ \ cam.pastorius0815@gmail.com \\
+      {\color{muted}PHONE} \ +1\ 850-240-8867 \\
+      {\color{muted}WEB} \ \ \ \ linkedin.com/in/cameron-pastorius \\
+      {\color{muted}GIT} \ \ \ \ \ github.com/Nostar42
   };
 
-  %% Company name bottom left
+  %% Company bottom-left
   \node[anchor=south west, text=muted,
-        font=\fontsize{6}{8}\selectfont\itshape]
-    at ([xshift=0.2in, yshift=0.12in]current page.south west)
-    {HG Engineers · Pensacola, FL};
+        font=\fontsize{6}{7}\itshape\sffamily]
+    at (0.18, 0.10) {HG Engineers · Pensacola, FL};
 
-  %% RIGHT BLOCK — QR code
-  \node[anchor=center]
-    at ([xshift=2.92in, yshift=-1.05in]current page.north west) {%
-    \qrcode[height=0.95in, level=M]{https://github.com/Nostar42}
+  %% QR code right side
+  \node[anchor=center] at (2.93, 0.84) {
+    \qrcode[height=1.0in, level=M]{https://github.com/Nostar42}
   };
 
   %% Scan label
   \node[anchor=center, text=muted,
-        font=\fontsize{5.5}{7}\selectfont]
-    at ([xshift=2.92in, yshift=-1.62in]current page.north west)
-    {SCAN FOR GITHUB};
+        font=\fontsize{5.5}{7}\sffamily]
+    at (2.93, 0.26) {SCAN FOR GITHUB};
 
 \end{tikzpicture}
 \end{document}
