@@ -8,9 +8,9 @@
 \usepackage{helvet}
 \renewcommand{\familydefault}{\sfdefault}
 
-\definecolor{accent}{HTML}{1a1d27}
-\definecolor{indigo}{HTML}{6366f1}
-\definecolor{muted}{HTML}{6b7280}
+\definecolor{dark}{HTML}{1a1917}
+\definecolor{accent}{HTML}{6366f1}
+\definecolor{muted}{HTML}{9ca3af}
 
 \pagestyle{empty}
 
@@ -18,52 +18,39 @@
 \noindent
 \begin{tikzpicture}[x=1in, y=1in]
 
-  %% Full white background
+  %% White background
   \fill[white] (0,0) rectangle (3.5,2);
 
-  %% Dark header bar (top 0.42in)
-  \fill[accent] (0, 1.58) rectangle (3.5, 2);
-
-  %% Indigo triangle accent in top-right of header
-  \fill[indigo] (2.85,1.58) -- (3.5,1.58) -- (3.5,2) -- cycle;
+  %% Thin accent rule at top
+  \fill[accent] (0, 1.94) rectangle (3.5, 2.0);
 
   %% Name
-  \node[anchor=west, text=white,
-        font=\fontsize{13.5}{16}\bfseries\sffamily]
-    at (0.18, 1.79) {CAMERON J. PASTORIUS};
+  \node[anchor=west, text=dark,
+        font=\fontsize{15}{18}\bfseries\sffamily]
+    at (0.22, 1.68) {Cameron Pastorius};
 
   %% Title
-  \node[anchor=west, text=indigo,
-        font=\fontsize{6.8}{8}\itshape\sffamily]
-    at (0.19, 1.64) {Electrical Designer \ $\cdot$ \ Engineering Intern (E.I.)};
+  \node[anchor=west, text=muted,
+        font=\fontsize{7}{9}\sffamily]
+    at (0.23, 1.53) {Electrical Designer \ $\cdot$ \ E.I. \ $\cdot$ \ HG Engineers};
 
-  %% Vertical divider between contact and QR
-  \draw[muted!40, line width=0.4pt] (2.38, 0.14) -- (2.38, 1.50);
+  %% Thin separator line
+  \draw[muted!40, line width=0.4pt] (0.22, 1.44) -- (3.28, 1.44);
 
-  %% Contact block
-  \node[anchor=north west, text=accent,
-        font=\fontsize{6.2}{11}\sffamily, align=left]
-    at (0.18, 1.50) {%
-      {\color{muted}EMAIL} \ \ cam.pastorius0815@gmail.com \\
-      {\color{muted}PHONE} \ +1\ 850-240-8867 \\
-      {\color{muted}WEB} \ \ \ \ linkedin.com/in/cameron-pastorius \\
-      {\color{muted}GIT} \ \ \ \ \ github.com/Nostar42
+  %% Contact info — left column
+  \node[anchor=north west, text=dark,
+        font=\fontsize{6.5}{12}\sffamily, align=left]
+    at (0.22, 1.36) {%
+      cam.pastorius0815@gmail.com \\
+      +1\ 850-240-8867 \\
+      linkedin.com/in/cameron-pastorius \\
+      github.com/Nostar42
   };
 
-  %% Company bottom-left
-  \node[anchor=south west, text=muted,
-        font=\fontsize{6}{7}\itshape\sffamily]
-    at (0.18, 0.10) {HG Engineers · Pensacola, FL};
-
-  %% QR code right side
-  \node[anchor=center] at (2.93, 0.84) {
-    \qrcode[height=1.0in, level=M]{https://github.com/Nostar42}
+  %% QR Code — bottom right
+  \node[anchor=south east] at (3.28, 0.13) {
+    \qrcode[height=0.85in, level=M]{https://github.com/Nostar42}
   };
-
-  %% Scan label
-  \node[anchor=center, text=muted,
-        font=\fontsize{5.5}{7}\sffamily]
-    at (2.93, 0.26) {SCAN FOR GITHUB};
 
 \end{tikzpicture}
 \end{document}
