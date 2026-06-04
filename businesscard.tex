@@ -1,93 +1,78 @@
-\documentclass[10pt]{article}
+\documentclass{article}
 
 \usepackage[paperwidth=3.5in, paperheight=2in, margin=0in]{geometry}
-\usepackage{fontspec}
 \usepackage{xcolor}
 \usepackage{tikz}
 \usepackage{qrcode}
-\usepackage{hyperref}
+\usepackage{helvet}
+\renewcommand{\familydefault}{\sfdefault}
 
-\hypersetup{hidelinks}
-
-% --- Fonts (matching website) ---
-\setmainfont{DM Sans}[
-  BoldFont = DM Sans Bold,
-  ItalicFont = DM Sans Italic
-]
-\newfontfamily\monofont{DM Mono}
-
-% --- Colors ---
-\definecolor{cardBg}{HTML}{1a1d27}
-\definecolor{cardText}{HTML}{f1f5f9}
-\definecolor{cardMuted}{HTML}{6b7280}
-\definecolor{cardAccent}{HTML}{6366f1}
+\definecolor{accent}{HTML}{1a1d27}
+\definecolor{indigo}{HTML}{6366f1}
+\definecolor{muted}{HTML}{6b7280}
+\definecolor{light}{HTML}{f7f6f2}
 
 \pagestyle{empty}
-\setlength{\parindent}{0pt}
 
-% ================================================================
 \begin{document}
-
 \begin{tikzpicture}[remember picture, overlay]
 
-  % Background
-  \fill[cardBg] (current page.south west) rectangle (current page.north east);
+  %% White background
+  \fill[white] (current page.south west) rectangle (current page.north east);
 
-  % Accent bar on left edge
-  \fill[cardAccent] (current page.south west) rectangle ([xshift=4pt]current page.north west);
+  %% Top accent strip
+  \fill[accent] (current page.north west) rectangle ([yshift=-0.38in]current page.north east);
 
-  % --- LEFT SIDE: Name & Info ---
-  % Name
-  \node[anchor=north west, text=cardText, font=\fontsize{13}{15}\bfseries\selectfont]
-    at ([xshift=18pt, yshift=-18pt]current page.north west)
+  %% Indigo notch bottom-right of strip
+  \fill[indigo]
+    ([xshift=-0.7in, yshift=-0.38in]current page.north east) --
+    ([yshift=-0.38in]current page.north east) --
+    ([xshift=0in, yshift=-0.56in]current page.north east) -- cycle;
+
+  %% Name in strip
+  \node[anchor=west, text=white,
+        font=\fontsize{14}{16}\bfseries\selectfont]
+    at ([xshift=0.2in, yshift=-0.19in]current page.north west)
     {CAMERON J. PASTORIUS};
 
-  % Title
-  \node[anchor=north west, text=cardAccent, font=\fontsize{7}{9}\monofont\selectfont]
-    at ([xshift=18pt, yshift=-34pt]current page.north west)
-    {ELECTRICAL DESIGNER · E.I.};
+  %% Title below name in strip
+  \node[anchor=west, text=indigo,
+        font=\fontsize{7}{9}\selectfont\itshape]
+    at ([xshift=0.21in, yshift=-0.32in]current page.north west)
+    {Electrical Designer · Engineering Intern (E.I.)};
 
-  % Divider line
-  \draw[cardMuted, line width=0.3pt]
-    ([xshift=18pt, yshift=-42pt]current page.north west) --
-    ([xshift=2.2in, yshift=-42pt]current page.north west);
+  %% Vertical divider
+  \draw[color=accent!15, line width=0.5pt]
+    ([xshift=2.35in, yshift=-0.38in]current page.north west) --
+    ([xshift=2.35in, yshift=0.15in]current page.south west);
 
-  % Email
-  \node[anchor=north west, text=cardMuted, font=\fontsize{6.5}{9}\monofont\selectfont]
-    at ([xshift=18pt, yshift=-50pt]current page.north west)
-    {cam.pastorius0815@gmail.com};
-
-  % Phone
-  \node[anchor=north west, text=cardMuted, font=\fontsize{6.5}{9}\monofont\selectfont]
-    at ([xshift=18pt, yshift=-61pt]current page.north west)
-    {+1 850-240-8867};
-
-  % LinkedIn
-  \node[anchor=north west, text=cardMuted, font=\fontsize{6.5}{9}\monofont\selectfont]
-    at ([xshift=18pt, yshift=-72pt]current page.north west)
-    {linkedin.com/in/cameron-pastorius};
-
-  % GitHub
-  \node[anchor=north west, text=cardMuted, font=\fontsize{6.5}{9}\monofont\selectfont]
-    at ([xshift=18pt, yshift=-83pt]current page.north west)
-    {github.com/Nostar42};
-
-  % HG Engineers
-  \node[anchor=south west, text=cardMuted, font=\fontsize{6}{8}\monofont\selectfont]
-    at ([xshift=18pt, yshift=14pt]current page.south west)
-    {HG ENGINEERS};
-
-  % --- RIGHT SIDE: QR Code ---
-  \node[anchor=east] at ([xshift=-14pt, yshift=0pt]current page.east) {
-    \color{white}
-    \qrcode[height=1.2in, level=M]{https://github.com/Nostar42}
+  %% LEFT BLOCK — contact info
+  \node[anchor=north west, text=muted,
+        font=\fontsize{6.2}{10}\selectfont, align=left]
+    at ([xshift=0.2in, yshift=-0.52in]current page.north west) {%
+    \textcolor{accent}{\textbf{EMAIL}}\quad cam.pastorius0815@gmail.com \\[3pt]
+    \textcolor{accent}{\textbf{PHONE}}\quad +1 850-240-8867 \\[3pt]
+    \textcolor{accent}{\textbf{WEB}}\hspace{6.5pt}\quad linkedin.com/in/cameron-pastorius \\[3pt]
+    \textcolor{accent}{\textbf{GIT}}\hspace{8.5pt}\quad github.com/Nostar42
   };
 
-  % "Scan me" label under QR
-  \node[anchor=north, text=cardMuted, font=\fontsize{5.5}{7}\monofont\selectfont]
-    at ([xshift=-46pt, yshift=-54pt]current page.north east)
-    {SCAN ME};
+  %% Company name bottom left
+  \node[anchor=south west, text=muted,
+        font=\fontsize{6}{8}\selectfont\itshape]
+    at ([xshift=0.2in, yshift=0.12in]current page.south west)
+    {HG Engineers · Pensacola, FL};
+
+  %% RIGHT BLOCK — QR code
+  \node[anchor=center]
+    at ([xshift=2.92in, yshift=-1.05in]current page.north west) {%
+    \qrcode[height=0.95in, level=M]{https://github.com/Nostar42}
+  };
+
+  %% Scan label
+  \node[anchor=center, text=muted,
+        font=\fontsize{5.5}{7}\selectfont]
+    at ([xshift=2.92in, yshift=-1.62in]current page.north west)
+    {SCAN FOR GITHUB};
 
 \end{tikzpicture}
-
 \end{document}
